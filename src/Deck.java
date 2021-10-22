@@ -26,7 +26,7 @@ public class Deck {
     //Revolver las cartas
     public String mezclar() {
         Collections.shuffle(card);
-        return "mezclando...";
+        return "Se mezcló el Deck";
     }
     //Primer carta del deck
     public void primerCarta(){
