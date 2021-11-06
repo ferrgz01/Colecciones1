@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    private static Deck deck = new Deck();
+    private static final Deck deck = new Deck();
+    public static int opc=0;
+    public static boolean fin = false;
+
 
     public static void main(String[] args) {
-
 
 
         String[] palo = {"Pika", "Corazon", "Diamante", "Trebol"};
@@ -20,17 +22,26 @@ public class Main {
 
         }
         System.out.println("Bienvenido a Poker!");
+
+while (fin == false){
+    try {
         showMenu();
-
-
+    } catch (Exception e) {
+        System.out.println("Opción no válida");
+        fin = false;
+    }
+}
     }
 
-    private static void showMenu() {
+
+
+
+    public static void showMenu() throws Exception {
         Scanner sn = new Scanner(System.in);
-        boolean fin = false;
-        int opc;
-        
-            while (!fin) {
+
+
+
+            while (fin != true){
                 System.out.println("\nSelecciona una opción:");
                 System.out.println("1 Mezclar deck");
                 System.out.println("2 Sacar una carta");
@@ -45,16 +56,36 @@ public class Main {
                         System.out.println(deck.mezclar());
                         break;
                     case 2:
-                        System.out.println("\nPrimer carta del deck: ");
-                        deck.primerCarta();
+
+                        try {
+                            System.out.println("\nPrimer carta del deck: ");
+                            deck.primerCarta();
+                        } catch (Exception e){
+                            System.out.println(e.getMessage());
+                            fin = true;
+
+                            }
+
+
                         break;
                     case 3:
-                        System.out.println("\nCarta al azar: ");
-                        deck.random();
+                        try {
+                            System.out.println("\nCarta al azar: ");
+                            deck.random();
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
+                            fin = true;
+                        }
+
                         break;
                     case 4:
-                        System.out.println("\nMano de 5 cartas: ");
-                        deck.mano();
+                        try {
+                            System.out.println("\nMano de 5 cartas: ");
+                            deck.mano();
+                        } catch (Exception e){
+                            System.out.println(e.getMessage());
+                            fin=true;
+                        }
 
                         break;
                     case 0:
@@ -71,10 +102,10 @@ public class Main {
 
 
     public static String getColor(String palo) {
-        if (palo.toLowerCase().equals("pika") || palo.toLowerCase().equals("trebol")) {
+        if (palo.equalsIgnoreCase("pika") || palo.equalsIgnoreCase("trebol")) {
             return "negro";
         }
-        if (palo.toLowerCase().equals("corazon") || palo.toLowerCase().equals("diamante")) {
+        if (palo.equalsIgnoreCase("corazon") || palo.equalsIgnoreCase("diamante")) {
             return "rojo";
         }
 

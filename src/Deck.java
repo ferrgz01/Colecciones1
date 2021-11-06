@@ -29,26 +29,39 @@ public class Deck {
         return "Se mezcló el Deck";
     }
     //Primer carta del deck
-    public void primerCarta(){
+    public void primerCarta() throws Exception{
+
         Card card= getCard().get(0);
         System.out.println("{"+card.getPalo()+"}, {"+card.getColor()+"}, {"+card.getValor()+"}");
         this.card.remove(0);
         System.out.println("Quedan {"+getCard().size()+"}");
+        if (getCard().size() == 0 ){
+            throw new Exception("No quedan más cartas");
+        }
+
     }
 
     //Carta al azar
-    public void random(){
-        Random random = new Random();
-        int numRandom=random.nextInt(getCard().size());
-        Card card = getCard().get(numRandom);
-        System.out.println("{"+card.getPalo()+"}, {"+card.getColor()+"}, {"+card.getValor()+"}");
-        this.card.remove(numRandom);
-        System.out.println("Quedan {"+getCard().size()+"}");
+    public void random() throws Exception{
+
+            Random random = new Random();
+            int numRandom=random.nextInt(getCard().size());
+            Card card = getCard().get(numRandom);
+            System.out.println("{"+card.getPalo()+"}, {"+card.getColor()+"}, {"+card.getValor()+"}");
+            this.card.remove(numRandom);
+            System.out.println("Quedan {"+getCard().size()+"}");
+        if (getCard().size() == 1){
+            throw new Exception("No quedan más cartas");
+        }
+
 
     }
 
     //Mano de cartas
-    public void mano(){
+    public void mano() throws Exception{
+       if (getCard().size() < 5 ){
+            throw new Exception("No quedan más cartas");
+        }
         for (int i =0; i<5;i++ ){
             Random random = new Random();
             int numRandom=random.nextInt(getCard().size());
